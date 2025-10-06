@@ -102,20 +102,6 @@ end)
    - Invalid whitelist format → Return false
    - Empty whitelist → Return false
 
-## 💡 Usage Notes
-
-**Untuk Admin:**
-- Tambahkan Device ID ke file `svip.txt` di GitHub repository
-- Format: Satu Device ID per baris
-- No special characters atau formatting needed
-
-**Untuk Users:**
-1. Jalankan script
-2. Jika belum verified, copy Device ID yang muncul
-3. Kirim Device ID ke admin
-4. Tunggu admin menambahkan ke whitelist
-5. Restart script setelah ditambahkan
-
 ## 🐛 Bug Fixes
 - Fixed theme application untuk new buttons
 - Fixed scroll canvas size calculation dengan new buttons
