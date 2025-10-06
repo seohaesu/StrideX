@@ -4,7 +4,6 @@
 
 ### Device Security System
 - **Device ID Verification**: Script sekarang memerlukan verifikasi Device ID melalui whitelist GitHub
-- **Whitelist URL**: `https://raw.githubusercontent.com/seohaesu/StrideX/refs/heads/main/svip.txt`
 - **Verification UI**: Panel verifikasi khusus yang muncul jika Device ID belum terdaftar
 - **Copy Device ID Button**: Tombol untuk copy Device ID secara otomatis ke clipboard
 - **Visual Feedback**: Animasi konfirmasi saat Device ID berhasil dicopy
