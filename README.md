@@ -1,118 +1,42 @@
-# StrideX v4.8 - Changelog
 
-## 🆕 New Features
+## ✅ **Update v4.9 - Changelog:**
 
-### Device Security System
-- **Device ID Verification**: Script sekarang memerlukan verifikasi Device ID melalui whitelist GitHub
-- **Verification UI**: Panel verifikasi khusus yang muncul jika Device ID belum terdaftar
-- **Copy Device ID Button**: Tombol untuk copy Device ID secara otomatis ke clipboard
-- **Visual Feedback**: Animasi konfirmasi saat Device ID berhasil dicopy
+### 1. **🦘 Smooth Jump Animation**
+- Jump menggunakan `humanoid:ChangeState()` untuk animasi natural
+- Buffer system untuk smooth jump detection
+- Jump cooldown yang lebih responsive (0.25s)
+- State tracking yang lebih akurat
 
-### Replay Management Buttons
-- **Check All Button** (`✓ All`): Mencentang semua replay sekaligus untuk queue
-  - Posisi: Kanan atas di Saved Replays section
-  - Warna: Success Green (hijau)
-  - Animasi hover dan click feedback
-  
-- **Clear All Button** (`✗ All`): Menghapus centang semua replay sekaligus
-  - Posisi: Kanan atas di Saved Replays section (sebelah Check All)
-  - Warna: Danger Red (merah)
-  - Animasi hover dan click feedback
+### 2. **🔧 Fixed Running/Falling Detection**
+- **Ground stability detection** - menggunakan buffer untuk track Y-axis movement
+- **Prioritas horizontal movement** - jika ada movement horizontal + ground stabil = Running (bukan Falling)
+- Threshold yang lebih akurat:
+  - `horizontalSpeed > 3` + `isOnStableGround` = Walking/Running
+  - `avgYMovement < 0.5` = Ground stabil
+- Jump dan Falling detection yang lebih pintar
 
-## 🔧 Technical Improvements
+### 3. **🛡️ God Mode Button**
+- Toggle ON/OFF dengan visual feedback
+- Set `Health = math.huge` dan `MaxHealth = math.huge`
+- Auto-monitor health changes
+- Proteksi dari fall damage & obstacles
+- Auto-apply saat respawn jika enabled
 
-### Security Implementation
-```lua
-- Device ID fetching via RbxAnalyticsService:GetClientId()
-- HTTP whitelist checking dengan error handling
-- Graceful fallback jika koneksi gagal
-- Auto-save Device ID untuk debugging
-```
+### 4. **📱 Mobile-Friendly UI**
+- Auto-detect screen size (`isMobile` detection)
+- Dynamic panel sizing untuk mobile
+- Button spacing yang responsive
+- Hide up/down arrows di mobile
+- Touch-optimized button sizes (30x30px)
 
-### UI Enhancements
-- Expanded replay box height: `90px → 140px` untuk accommodate new buttons
-- Panel size adjustment: `500px → 550px` height
-- Improved button spacing dan positioning
-- Modern rounded corners (6px radius) untuk mini buttons
+### 5. **Improvements Lainnya:**
+- Smoothing buffer diperkecil (3 frame) untuk responsiveness
+- Teleport to start position tetap berfungsi
+- Better velocity smoothing (0.35 lerp)
+- Enhanced body frame smoothing
 
-### Button Functionality
-```lua
-checkAllBtn.MouseButton1Click:Connect(function()
-    - Iterates semua savedReplays
-    - Set Selected = true untuk semua
-    - Refresh UI
-    - Auto-save ke file
-    - Visual feedback animation
-end)
-
-clearAllBtn.MouseButton1Click:Connect(function()
-    - Iterates semua savedReplays  
-    - Set Selected = false untuk semua
-    - Refresh UI
-    - Auto-save ke file
-    - Visual feedback animation
-end)
-```
-
-## 📋 Version History Context
-
-**From v4.7 → v4.8:**
-- Added Device ID Security System
-- Added Check All / Clear All buttons
-- Improved UX untuk bulk replay selection
-- Enhanced security untuk prevent unauthorized usage
-
-## 🎨 UI Changes
-
-### Verification Panel (New)
-- Size: 400x250px
-- Modern rounded design (16px corners)
-- Warning icon dan message
-- Device ID display box dengan Code font
-- Copy button dengan success feedback
-- Centered positioning
-
-### Replay Section Updates
-- New button row di header
-- Compact 20px height buttons
-- 4px spacing between buttons
-- Maintains scroll functionality
-- Auto-layout dengan UIListLayout
-
-## 🔐 Security Flow
-
-1. **Startup Check**
-   ```
-   Script Start → Fetch Device ID → Check Whitelist
-   ├─ If Verified → Load Main UI
-   └─ If Not Verified → Show Verification Panel → Stop Execution
-   ```
-
-2. **Whitelist Format**
-   ```
-   device-id-1
-   device-id-2
-   device-id-3
-   ...
-   ```
-
-3. **Error Handling**
-   - HTTP request failures → Return false (deny access)
-   - Invalid whitelist format → Return false
-   - Empty whitelist → Return false
-
-## 🐛 Bug Fixes
-- Fixed theme application untuk new buttons
-- Fixed scroll canvas size calculation dengan new buttons
-- Improved button hover states consistency
-
-## 📊 Performance
-- Minimal impact on load time (+~50ms untuk whitelist check)
-- No performance degradation pada runtime
-- Efficient bulk selection algorithms (O(n) complexity)
-
----
-
-**Version:** 4.8  
-**Release Date:** 2025  
-**Compatibility:** Solara, Wave, Synapse X, Executor dengan file API support
+## 🎯 **Cara Pakai God Mode:**
+1. Klik button **"God Mode OFF"** 
+2. Button akan berubah hijau **"God Mode ON"**
+3. Karakter kebal dari damage & fall damage
+4. Klik lagi untuk disable
